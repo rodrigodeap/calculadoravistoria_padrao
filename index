@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>VISTORIADOR PRO · Blindagem Jurídica</title>
+  <!-- Tailwind via CDN + fonte inter -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
+    body { background: #0b0e14; }
+    .neon-glow { text-shadow: 0 0 8px #2ecc71, 0 0 20px #2ecc7150; }
+    .card-neon { border: 1px solid #2ecc7130; background: #141a24; backdrop-filter: blur(2px); }
+    .card-neon:hover { border-color: #2ecc71; box-shadow: 0 0 25px #2ecc7120; }
+    .btn-pulse { animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 #2ecc7160; } 70% { box-shadow: 0 0 0 12px #2ecc7100; } 100% { box-shadow: 0 0 0 0 #2ecc7100; } }
+    .overflow-trecho { max-height: 110px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2ecc71 #1e2633; }
+    .overflow-trecho::-webkit-scrollbar { width: 5px; }
+    .overflow-trecho::-webkit-scrollbar-track { background: #1e2633; border-radius: 8px; }
+    .overflow-trecho::-webkit-scrollbar-thumb { background: #2ecc71; border-radius: 8px; }
+    input[type="number"]::-webkit-inner-spin-button { opacity: 0.6; }
+    .bg-gradient-dark { background: linear-gradient(145deg, #0b0e14 0%, #141a24 100%); }
+  </style>
+</head>
+<body class="bg-gradient-dark text-gray-200 antialiased">
+
+  <!-- ========== CONFIGURAÇÃO JS (variáveis editáveis) ========== -->
+  <script>
+    // ================================================================
+    //  CONFIGURAÇÃO FÁCIL – ALTERE SOMENTE ESTES VALORES
+    // ================================================================
+    const CONFIG = {
+      valorM2SemMobilia: 6.00,      // R$ / m²  (alterado de 3 para 6)
+      valorM2Semimobiliado: 7.00,   // R$ / m²  (alterado de 4 para 7)
+      valorM2Mobiliado: 8.00,       // R$ / m²  (alterado de 4.5 para 8)
+      valorBaseLaudoTRT: 200.00,    // R$ (laudo técnico com TRT) - alterado para 200
+      whatsapp: "5521990650767",    // número com DDD (sem +) - alterado
+      email: "suportevistoriadorpro@gmail.com"
+    };
+    // ================================================================
+  </script>
+
+  <!-- ===== HERO + NAV ===== -->
+  <header class="w-full max-w-6xl mx-auto px-5 pt-6 pb-2 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-[#2ecc7120]">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
+        <span class="text-[#2ecc71] text-3xl">◆</span> VISTORIADOR PRO
+      </h1>
+      <p class="text-xs uppercase tracking-[0.2em] text-[#2ecc71] font-semibold mt-0.5">Blindagem Jurídica para Imobiliárias</p>
+    </div>
+    <div class="mt-3 md:mt-0 flex flex-wrap gap-3 text-sm">
+      <!-- alterado para "Atendimento 24h" -->
+      <span class="bg-[#1e2633] px-3 py-1.5 rounded-full border border-[#2ecc7120] flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-[#2ecc71] rounded-full animate-pulse"></span> Atendimento 24h
+      </span>
+      <span class="bg-[#1e2633] px-3 py-1.5 rounded-full border border-[#2ecc7120]">🔒 Laudo com TRT</span>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-5 py-6 space-y-12">
+
+    <!-- ===== 2. HERO SECTION ===== -->
+    <section class="text-center md:text-left space-y-4 py-4">
+      <span class="inline-block bg-[#2ecc71] text-[#0b0e14] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Segurança patrimonial</span>
+      <!-- alterado para "ALTO PADRÃO" -->
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white">
+        IMÓVEL RESIDENCIAL <br class="hidden md:block"><span class="text-[#2ecc71] neon-glow">ALTO PADRÃO</span>
+      </h2>
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto md:mx-0 leading-relaxed">
+        Vistorias imobiliárias que eliminam riscos jurídicos, reduzem custos operacionais e garantem segurança patrimonial.
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
+        <span class="bg-[#1e2633] px-4 py-2 rounded-xl text-sm border border-[#2ecc7120]">📋 +194 páginas de detalhamento</span>
+        <span class="bg-[#1e2633] px-4 py-2 rounded-xl text-sm border border-[#2ecc7120]">⚖️ Termo de Responsabilidade Técnica</span>
+      </div>
+    </section>
+
+    <!-- ===== 3. CALCULADORA DINÂMICA (CARDS) ===== -->
+    <section class="card-neon rounded-2xl p-6 md:p-8 shadow-2xl">
+      <div class="flex flex-col md:flex-row items-start md:items-end gap-4 mb-6">
+        <div class="w-full md:w-1/2">
+          <label class="block text-sm font-semibold text-[#2ecc71] uppercase tracking-wider mb-1">Metragem do imóvel (m²)</label>
+          <div class="flex items-center gap-3 bg-[#0b0e14] border border-[#2ecc7140] rounded-xl px-4 py-2 focus-within:border-[#2ecc71] transition">
+            <span class="text-[#2ecc71] text-xl">📐</span>
+            <input type="number" id="metrosInput" value="75" min="10" max="999" step="0.5" class="w-full bg-transparent text-white text-xl font-semibold outline-none placeholder-gray-500">
+            <span class="text-gray-400 text-sm">m²</span>
+          </div>
+        </div>
+        <div class="text-sm text-gray-400 bg-[#1e2633] px-4 py-2 rounded-xl border border-[#2ecc7120]">
+          ⚡ Atualização automática
+        </div>
+      </div>
+
+      <!-- 3 cards lado a lado / empilhados -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5" id="cardsContainer">
+        <!-- card SEM MOBÍLIA -->
+        <div class="card-neon rounded-xl p-5 text-center transition-all hover:scale-[1.02]">
+          <div class="text-sm uppercase tracking-wider text-gray-400">Sem Mobília</div>
+          <div class="text-2xl font-bold text-white mt-1">Planejados apenas na cozinha</div>
+          <div class="mt-3 text-4xl font-extrabold text-[#2ecc71]"><span id="precoSemMobilia">R$ 450,00</span></div>
+          <div class="text-xs text-gray-400 mt-1.5">base R$ 3,00 / m²</div>
+          <div class="mt-4 text-xs bg-[#1e2633] py-1.5 rounded-full px-3 inline-block border border-[#2ecc7120]">🔹 Valor por m²: R$ 3,00</div>
+        </div>
+        <!-- card SEMIMOBILIADO -->
+        <div class="card-neon rounded-xl p-5 text-center transition-all hover:scale-[1.02] border-[#2ecc7160]">
+          <div class="text-sm uppercase tracking-wider text-gray-400">Semimobiliado</div>
+          <div class="text-2xl font-bold text-white mt-1">Planejados na cozinha e quartos</div>
+          <div class="mt-3 text-4xl font-extrabold text-[#2ecc71]"><span id="precoSemimobiliado">R$ 525,00</span></div>
+          <div class="text-xs text-gray-400 mt-1.5">base R$ 4,00 / m²</div>
+          <div class="mt-4 text-xs bg-[#1e2633] py-1.5 rounded-full px-3 inline-block border border-[#2ecc7120]">🔹 Valor por m²: R$ 4,00</div>
+        </div>
+        <!-- card MOBILIADO -->
+        <div class="card-neon rounded-xl p-5 text-center transition-all hover:scale-[1.02] border-[#2ecc7190]">
+          <div class="text-sm uppercase tracking-wider text-gray-400">Mobiliado</div>
+          <div class="text-2xl font-bold text-white mt-1">Residência com mobília completa</div>
+          <div class="mt-3 text-4xl font-extrabold text-[#2ecc71]"><span id="precoMobiliado">R$ 600,00</span></div>
+          <div class="text-xs text-gray-400 mt-1.5">base R$ 4,50 / m²</div>
+          <div class="mt-4 text-xs bg-[#1e2633] py-1.5 rounded-full px-3 inline-block border border-[#2ecc7120]">🔹 Valor por m²: R$ 4,50</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. MÓDULO LAUDO TÉCNICO COM TRT ===== -->
+    <section class="card-neon rounded-2xl p-6 md:p-8 border-l-4 border-[#2ecc71] bg-[#0f1722]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <span class="inline-block bg-[#2ecc71] text-[#0b0e14] text-xs font-bold px-3 py-1 rounded-full uppercase">Premium</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white mt-2 flex items-center gap-2">
+            <span>📄 Laudo Técnico com TRT</span>
+          </h3>
+          <!-- explicação: profissional técnico em edificações -->
+          <p class="text-gray-300 max-w-xl">Laudo emitido por <strong class="text-white">profissional técnico em edificações</strong>, com Termo de Responsabilidade Técnica (TRT) e respaldo legal.</p>
+        </div>
+        <div class="bg-[#1e2633] px-6 py-3 rounded-xl border border-[#2ecc71] text-center min-w-[160px]">
+          <span class="text-sm text-gray-400">A partir de</span>
+          <div class="text-3xl font-extrabold text-[#2ecc71]"><span id="precoTRT">R$ 200,00</span></div>
+          <!-- alterado para "valor base (negociável)" -->
+          <span class="text-[10px] text-gray-400">valor base (negociável)</span>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <span class="bg-[#0b0e14] px-4 py-1.5 rounded-full text-xs border border-[#2ecc7130]">👨‍🔬 Responsável técnico</span>
+        <span class="bg-[#0b0e14] px-4 py-1.5 rounded-full text-xs border border-[#2ecc7130]">⚖️ Conformidade com ABNT</span>
+        <span class="bg-[#0b0e14] px-4 py-1.5 rounded-full text-xs border border-[#2ecc7130]">🛡️ Blindagem jurídica</span>
+      </div>
+    </section>
+
+    <!-- ===== 5. PROVA SOCIAL + AMOSTRA LAUDO ===== -->
+    <section class="space-y-5">
+      <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+        <span class="text-[#2ecc71] text-3xl">📋</span> Conheça o nosso Padrão de Entrega
+      </h2>
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- botão download -->
+        <div class="md:w-2/5">
+          <a href="amostra_laudo.pdf" download class="btn-pulse inline-flex items-center gap-3 bg-[#2ecc71] hover:bg-[#27ae60] text-[#0b0e14] font-bold py-4 px-8 rounded-2xl text-lg transition-all shadow-lg shadow-[#2ecc7130]">
+            ⬇️ Baixar Amostra de Laudo (PDF)
+          </a>
+          <p class="text-xs text-gray-400 mt-3">Arquivo com 194 páginas de fotografias e detalhamentos técnicos.</p>
+        </div>
+        <!-- box rolável com trecho real -->
+        <div class="md:w-3/5 card-neon rounded-xl p-4 bg-[#0f1722]">
+          <div class="flex items-center gap-2 text-[#2ecc71] text-sm font-semibold mb-2">
+            <span>📌 Trecho real do laudo</span>
+            <span class="w-2 h-2 bg-[#2ecc71] rounded-full animate-pulse"></span>
+          </div>
+          <div class="overflow-trecho text-sm text-gray-300 leading-relaxed pr-2">
+            <p><span class="text-[#2ecc71] font-semibold">Ambiente: Sala</span> - Porta, batentes e guarnições: Em bom estado; Modelo: Porta frisada; Tipo: Abrir e fechar; Material da pintura: Verniz; Material da porta: Madeira. Piso: Em bom estado; Material do piso: Porcelanato; Cor: Palha; Rodapé: Mesmo material do piso;  Revestimento: Textura suave, tons neutros; Instalações elétricas: em conformidade; Tomadas e interruptores: sem avarias; Esquadrias: alumínio com pintura eletrostática, em perfeito estado; Vidros: sem trincos. Obs.: vistoria fotográfica em anexo (194 páginas).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. RODAPÉ + CTA FINAL ===== -->
+    <footer class="border-t border-[#2ecc7120] pt-8 pb-6 space-y-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <!-- botão whatsapp pulsante com link direto atualizado -->
+        <a id="whatsappCTA" href="#" target="_blank" class="btn-pulse inline-flex items-center gap-3 bg-[#25d366] hover:bg-[#1da851] text-[#0b0e14] font-extrabold py-4 px-10 rounded-full text-xl transition-all shadow-2xl shadow-[#25d36640]">
+          💬 FAÇA UM ORÇAMENTO!
+        </a>
+        <div class="flex flex-wrap items-center gap-5 text-sm text-gray-300">
+          <!-- telefone alterado para (21) 99065-0767 -->
+          <span class="flex items-center gap-2">📞 <a href="tel:+5521990650767" class="hover:text-[#2ecc71]">(21) 99065-0767</a></span>
+          <span class="flex items-center gap-2">✉️ <a href="mailto:suportevistoriadorpro@gmail.com" class="hover:text-[#2ecc71]">suportevistoriadorpro@gmail.com</a></span>
+        </div>
+      </div>
+      <div class="text-center text-[10px] text-gray-500 border-t border-[#1e2633] pt-4">
+        &copy; 2026 VISTORIADOR PRO · Blindagem Jurídica para Imobiliárias · Todos os direitos reservados.
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========== VANILLA JAVASCRIPT ========== -->
+  <script>
+    (function() {
+      "use strict";
+
+      // --- Referências DOM ---
+      const inputMetros = document.getElementById('metrosInput');
+      const spanSemMobilia = document.getElementById('precoSemMobilia');
+      const spanSemimobiliado = document.getElementById('precoSemimobiliado');
+      const spanMobiliado = document.getElementById('precoMobiliado');
+      const spanTRT = document.getElementById('precoTRT');
+      const whatsappBtn = document.getElementById('whatsappCTA');
+
+      // --- Elementos para montar mensagem ---
+      let ultimoCalculo = { 
+        metros: 75, 
+        semMob: 450.00, 
+        semi: 525.00, 
+        mob: 600.00 
+      };
+
+      // --- Função de atualização dos preços ---
+      function atualizarPrecos() {
+        let metros = parseFloat(inputMetros.value);
+        if (isNaN(metros) || metros <= 0) metros = 0;
+        const m2 = Math.max(0, metros);
+
+        const vSem = CONFIG.valorM2SemMobilia;
+        const vSemi = CONFIG.valorM2Semimobiliado;
+        const vMob = CONFIG.valorM2Mobiliado;
+
+        const precoSem = m2 * vSem;
+        const precoSemi = m2 * vSemi;
+        const precoMob = m2 * vMob;
+
+        const fmt = (val) => 'R$ ' + val.toFixed(2).replace('.', ',');
+        spanSemMobilia.textContent = fmt(precoSem);
+        spanSemimobiliado.textContent = fmt(precoSemi);
+        spanMobiliado.textContent = fmt(precoMob);
+        spanTRT.textContent = 'R$ ' + CONFIG.valorBaseLaudoTRT.toFixed(2).replace('.', ',');
+
+        ultimoCalculo = { metros: m2, semMob: precoSem, semi: precoSemi, mob: precoMob };
+      }
+
+      // --- Montar mensagem WhatsApp (link direto com texto personalizado) ---
+      function montarMensagem() {
+        const m = ultimoCalculo;
+        return encodeURIComponent(
+`🔍 *VISTORIADOR PRO - Orçamento*
+📐 Metragem: ${m.metros} m²
+🏠 Sem mobília: R$ ${m.semMob.toFixed(2)}
+🛋️ Semimobiliado: R$ ${m.semi.toFixed(2)}
+🪑 Mobiliado: R$ ${m.mob.toFixed(2)}
+📄 Laudo com TRT: R$ ${CONFIG.valorBaseLaudoTRT.toFixed(2)}
+
+Gostaria de contratar a vistoria! 🚀`
+        );
+      }
+
+      // --- Atualizar link do WhatsApp (usando o link direto fornecido) ---
+      function atualizarWhatsAppLink() {
+        const msg = montarMensagem();
+        // Link direto com número e texto fixo + personalizado
+        whatsappBtn.href = `https://api.whatsapp.com/send/?phone=5521990650767&text=${msg}`;
+      }
+
+      // --- Event listeners ---
+      inputMetros.addEventListener('input', function() {
+        atualizarPrecos();
+        atualizarWhatsAppLink();
+      });
+
+      // --- Inicialização ---
+      function init() {
+        inputMetros.value = 75;
+        atualizarPrecos();
+        atualizarWhatsAppLink();
+
+        whatsappBtn.addEventListener('click', function(e) {
+          atualizarPrecos();
+          atualizarWhatsAppLink();
+        });
+      }
+
+      init();
+
+    })();
+  </script>
+
+</body>
+</html>
